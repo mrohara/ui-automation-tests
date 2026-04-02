@@ -211,22 +211,6 @@ Você verá algo como:
 
 ---
 
-### Execução com navegador visível
-
-```bash
-ENV=prod npx playwright test --headed
-```
-
----
-
-### Execução em modo debug
-
-```bash
-ENV=prod npx playwright test --debug
-```
-
----
-
 ## 📊 Relatório
 
 Após execução:
