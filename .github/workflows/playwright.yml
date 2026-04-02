@@ -1,11 +1,32 @@
 name: UI Tests
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
   workflow_dispatch:
+    inputs:
+      env:
+        description: Environment
+        required: true
+        default: prod
+        type: choice
+        options:
+          - prod
+      browser:
+        description: Browser
+        required: true
+        default: chromium
+        type: choice
+        options:
+          - chromium
+          - firefox
+          - webkit
+      suite:
+        description: Test suite
+        required: true
+        default: smoke
+        type: choice
+        options:
+          - smoke
+          - all
 
 jobs:
   ui-tests:
@@ -13,9 +34,9 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      ENV: prod
-      BROWSER: chromium
-      SUITE: smoke
+      ENV: ${{ inputs.env }}
+      BROWSER: ${{ inputs.browser }}
+      SUITE: ${{ inputs.suite == 'all' && '' || inputs.suite }}
 
     steps:
       - name: Checkout repository
@@ -34,7 +55,12 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run tests
-        run: npm run test:run
+        run: |
+          if [ "${SUITE}" = "" ]; then
+            ENV=$ENV BROWSER=$BROWSER npm run test:run
+          else
+            ENV=$ENV BROWSER=$BROWSER SUITE=$SUITE npm run test:run
+          fi
 
       - name: Upload Playwright report
         if: always()
