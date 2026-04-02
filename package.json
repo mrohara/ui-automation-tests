@@ -4,12 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:prod:chrome": "ENV=prod playwright test --project=chromium",
-    "test:prod:firefox": "ENV=prod playwright test --project=firefox",
-    "test:prod:webkit": "ENV=prod playwright test --project=webkit",
-    "test:prod:smoke": "ENV=prod npx playwright test --grep @smoke",
     "test:prod": "ENV=prod playwright test",
-    "test:prod:chrome:debug": "ENV=prod playwright test --project=chromium --debug",
+    "test:prod:smoke": "ENV=prod playwright test --grep @smoke",
+    "test:run": "ENV=${ENV:-prod} playwright test ${BROWSER:+--project=$BROWSER} ${SUITE:+--grep @$SUITE}",
+    "test:debug": "ENV=${ENV:-prod} playwright test ${BROWSER:+--project=$BROWSER} --debug ${SUITE:+--grep @$SUITE}",
     "report": "npx playwright show-report"
   },
   "keywords": [],
