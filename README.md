@@ -161,8 +161,6 @@ npx playwright install
 
 ## ▶️ Execução dos testes
 
-### Execução padrão
-
 Foram criados alguns scripts para facilitar execução, levando em consideração apenas ambiente de prod e devidas finalizades.
 
 ### Execução local
