@@ -165,16 +165,51 @@ npx playwright install
 
 Foram criados alguns scripts para facilitar execução, levando em consideração apenas ambiente de prod e devidas finalizades.
 
+### Execução local
+
+Os testes podem ser executados localmente utilizando variáveis de ambiente para definir:
+
+- ambiente (`ENV`)
+- browser (`BROWSER`)
+- suíte (`SUITE`)
+
+exemplo rápido:
+
 ```bash
-Execução no chrome:
-    npm run test:prod:chrome
-Execução no firefox:
-    npm run test:prod:firefox
-Execução no webkit:
-    npm run test:prod:webkit
-Execução Smoke suíte:
-    npm run test:prod:smoke
+npm run test:prod:smoke
 ```
+
+```bash
+npm run test:run
+```
+
+###  Execução via pipeline (GitHub Actions)
+
+O projeto possui integração com GitHub Actions permitindo execução manual dos testes diretamente pela interface do GitHub.
+
+Como executar
+- Acesse o repositório no GitHub
+- Vá até a aba Actions
+- Selecione o workflow UI Tests
+- Clique em Run workflow
+- Escolha os parâmetros desejados:
+- Environment: prod
+- Browser: chromium, firefox ou webkit
+- Test suite:
+- smoke → executa apenas testes principais
+- all → executa toda a suíte
+- Clique em Run workflow
+
+### Como baixar o report da pipeline (GitHub Actions)
+
+- Vá no seu repositório no GitHub
+- Clique na aba Actions
+- Clique na execução do workflow (UI Tests)
+- No final da página, procure por Artifacts
+
+Você verá algo como:
+
+- playwright-report
 
 ---
 
